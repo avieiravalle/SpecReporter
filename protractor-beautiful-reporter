@@ -1,0 +1,53 @@
+// npm i protractor-beautiful-reporter
+
+var HtmlReporter = require('protractor-beautiful-reporter');
+
+exports.config = {
+
+    //directConnect: true,
+    baseUrl: '',
+    framework: 'jasmine',
+
+    capabilities: {
+        browserName: 'chrome', 'shardTestFiles': true, 'maxInstances': 1,
+        chromeOptions: {
+            args: [/*"--headless",*/
+                "--disable-gpu",
+                "--window-size=1280,1024"]
+        }
+    },
+
+    specs: ['./e2e/*.js'],
+    jasmineNodeOpts: {
+        showColors: true, defaultTimeoutInterval: 60000
+    },
+
+    onPrepare: function() {
+        browser.ignoreSynchronization = true;
+        browser.manage().window().maximize();
+        browser.manage().deleteAllCookies();
+        // Add a screenshot reporter and store screenshots to `/tmp/screenshots`:
+        jasmine.getEnv().addReporter(new HtmlReporter({
+           baseDirectory: 'Evidencias/screenshots',
+           jsonsSubfolder: 'jsons',
+           screenshotsSubfolder: 'images',
+           columnSettings:{
+            displayTime:true,
+            displayBrowser:true,
+            displaySessionId:false,
+            inlineScreenshots:true,
+         },
+         searchSettings:{
+            allselected: false,
+            passed: false,
+            failed: false,
+            pending: false,
+            withLog: false
+        },
+           docTitle: 'Evidencia de Testes Fleet',
+           preserveDirectory: true,
+        }).getJasmine2Reporter());
+     },
+     
+    highlightDelay: 500
+  }
