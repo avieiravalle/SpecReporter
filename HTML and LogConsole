@@ -7,7 +7,7 @@ var Jasmine2HtmlReporter = require("protractor-jasmine2-html-reporter");
 
 
 exports.config = {
-    baseUrl: 'http://demoqa.com/',
+    baseUrl: '',
     directConnect: true,
 	framework: 'jasmine',
 	//capabilities escolha do navegador headless
