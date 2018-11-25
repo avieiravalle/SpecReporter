@@ -1,0 +1,42 @@
+//npm install chercher-tech-jasmine-reporter
+
+
+exports.config = {
+  allScriptsTimeout: 11000,
+  specs: [
+    './e2e/Pg01.js'
+  ],
+  capabilities: {
+    browserName: 'chrome',
+    chromeOptions: {
+      args: [
+        "--headless",
+        "--disable-gpu",
+        "--window-size=1024,768",
+      ],
+    },
+  },
+  framework: 'jasmine',
+  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 30000,
+    print: function () {}
+  },
+  onPrepare: function() {
+    browser.ignoreSynchronization = true;
+    browser.manage().window().maximize();
+    browser.manage().deleteAllCookies();
+
+    var ChercherTechJasmineReporter = require('chercher-tech-jasmine-reporter');
+  
+    jasmine.getEnv().addReporter(new ChercherTechJasmineReporter({
+      screenshotOnFail :true,
+      reportName:'Vinhos',
+      showSkipped:true,
+      browser:browser,
+      showLineChart:true
+    }));
+  },
+
+  highlightDelay: 500,
+};
