@@ -1,0 +1,49 @@
+// npm install jasmine-spec-reporter --save-dev
+//npm install protractor-jasmine2-html-reporter --save-dev
+
+
+var SpecReporter = require("jasmine-spec-reporter").SpecReporter;
+var Jasmine2HtmlReporter = require("protractor-jasmine2-html-reporter");
+
+
+exports.config = {
+    baseUrl: 'http://demoqa.com/',
+    directConnect: true,
+	framework: 'jasmine',
+	//capabilities escolha do navegador headless
+	capabilities: {
+		browserName : 'chrome',
+		//'shardTestFiles': true,    'maxInstances': 1,
+		chromeOptions: {	args: [ "--headless", "--disable-gpu", "--window-size=1024,768" ]
+		}
+	},
+	
+	// testes chamados pelo protractor ['./*.js']
+	specs: ['CT001.js'],
+	//specs: ['./testes/*.js'],
+	
+	//opções para o jasmine de tempo
+	jasmineNodeOpts: { 
+	showColors: true, defaultTimeoutInterval: 60000
+	},
+    
+	//prints reports
+  onPrepare: function() {
+    browser.ignoreSynchronization = true;
+    browser.manage().window().maximize();
+    jasmine.getEnv().addReporter(new SpecReporter({
+        displayFailuresSummary: true,
+        displayFailedSpec: true,
+        displaySuiteNumber: true,
+        displaySpecDuration: true,
+    }));
+    jasmine.getEnv().addReporter(new Jasmine2HtmlReporter({
+        savePath: "test/e2e/html-report",
+        fileName: "Projeto QA",
+        fixedScreenshotName: true,
+        cleanDestination: false,
+        consolidate: true,
+        takeScreenshotsOnlyOnFailures: false,
+    }));
+  },
+  }
