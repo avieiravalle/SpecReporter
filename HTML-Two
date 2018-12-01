@@ -1,0 +1,22 @@
+// npm i protractor-html-screenshot-reporter
+
+var HtmlReporter = require('protractor-html-screenshot-reporter');
+ 
+exports.config = {
+ 
+   directConnect: true,
+   specs: ['./e2e/read.js'],
+
+   onPrepare: function() {
+      
+      jasmine.getEnv().addReporter(new HtmlReporter({
+         baseDirectory: '/tmp/screenshots',
+         takeScreenShotsForSkippedSpecs: true,
+         takeScreenShotsOnlyForFailedSpecs: true,
+         docTitle: 'my reporter',
+         docName: 'index.html',
+         cssOverrideFile: 'css/style.css',
+         preserveDirectory: true
+      }));
+   }
+}
