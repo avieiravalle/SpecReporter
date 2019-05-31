@@ -1,0 +1,71 @@
+//https://github.com/KrekkieD/protractor-snapshot
+//npm install --save-dev protractor-snapshot
+//in spec: var $snapshot = require('protractor-snapshot');
+// $snapshot.image("step1"); 
+
+
+var SpecReporter = require("jasmine-spec-reporter").SpecReporter;
+var Jasmine2HtmlReporter = require("protractor-jasmine2-html-reporter");
+
+exports.config = {
+    framework: 'jasmine',
+    capabilities: {
+        browserName: 'chrome',
+        chromeOptions: {
+            args: [/*"--headless",*/ "--window-size=800,600"]
+        }
+    },
+
+    protractorSnapshotOpts: {
+	basename: '%resolution%/%suiteId% - %suiteName%/%browser% - %specId% - %specName% (%increment%)',
+        image: {
+            target: './reports/protractor-snapshot/custom/image',
+            callbacks: [
+                function (instance, png, customConfig) {
+                },
+                require('protractor-snapshot').saveImage
+            ]
+        },
+        source: {
+            target: './reports/protractor-snapshot/custom/source',
+            removeMetaFragments: false,
+            callbacks: [
+                function (instance, html, customConfig) {
+                },
+                require('protractor-snapshot').saveSource
+            ]
+        },
+        defaultResolution: [700, 700, 'window'],
+        resolutions: [
+            [1366, 768, 'window'],
+			[320, 568, 'viewport']
+        ],
+        onInit: function ($snapshot) {
+            $snapshot.clearTarget('./reports');
+        },
+        report: './reports/protractor-snapshot/report.json'
+    },
+    specs: ['./e2e/todo-spec.js'],
+    onPrepare: function () {
+        var $protractorSnapshot = require('protractor-snapshot');
+        $protractorSnapshot.addReporter();
+        browser.ignoreSynchronization = true;
+        browser.manage().window().maximize();
+        jasmine.getEnv().addReporter(new SpecReporter({
+            displayFailuresSummary: true,
+            displayFailedSpec: true,
+            displaySuiteNumber: true,
+            displaySpecDuration: true,
+        }));
+        jasmine.getEnv().addReporter(new Jasmine2HtmlReporter({
+            savePath: "test/e2e/html-report",
+            fileName: "Projeto QA",
+            fixedScreenshotName: true,
+            cleanDestination: false,
+            consolidate: true,
+            takeScreenshotsOnlyOnFailures: false,
+        }));
+    },// highlightDelay: 500
+};
+
+
