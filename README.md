@@ -11,5 +11,9 @@ https://npms.io/search?q=protractor-screenshot
 
 
  browser.waitForAngularEnabled(true);
+ 
+ "http.proxy": "Proxy",
+ "http.proxyStrictSSL": false,
+ "https.proxy": "Proxy",
 
 
