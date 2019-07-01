@@ -11,3 +11,4 @@ Collection SpecReporter
  "https.proxy": "Proxy",
 
 
+https://webdriver.io/docs/allure-reporter.html
