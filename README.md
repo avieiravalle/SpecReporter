@@ -11,4 +11,7 @@ Collection SpecReporter
  "https.proxy": "Proxy",
 
 
+# Wiki
 https://webdriver.io/docs/allure-reporter.html
+
+https://www.swtestacademy.com/
