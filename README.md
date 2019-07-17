@@ -15,3 +15,5 @@ Collection SpecReporter
 https://webdriver.io/docs/allure-reporter.html
 
 https://www.swtestacademy.com/
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
