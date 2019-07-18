@@ -17,3 +17,9 @@ https://webdriver.io/docs/allure-reporter.html
 https://www.swtestacademy.com/
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+
+
+Selenium....
+https://www.agiletestware.com/docs/bumblebee-docs/en/latest/qa-frameworks/selenium-webdriver/
+
+https://community.microfocus.com/t5/Quality-Center-ALM-User/Executing-Selenium-tests-from-QC-ALM/td-p/947340
