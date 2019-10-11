@@ -9,7 +9,9 @@ Collection SpecReporter
  "http.proxy": "Proxy",
  "http.proxyStrictSSL": false,
  "https.proxy": "Proxy",
+ 
 
+webdriver-manager update --versions.chrome=77.0.3865.40
 
 # Wiki
 https://webdriver.io/docs/allure-reporter.html
