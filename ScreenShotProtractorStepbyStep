@@ -4,25 +4,21 @@
 // $snapshot.image("step1"); 
 
 
-var SpecReporter = require("jasmine-spec-reporter").SpecReporter;
-var Jasmine2HtmlReporter = require("protractor-jasmine2-html-reporter");
-
 exports.config = {
     framework: 'jasmine',
     capabilities: {
         browserName: 'chrome',
         chromeOptions: {
-            args: [/*"--headless",*/ "--window-size=800,600"]
+            args: ["--headless", "--window-size=800,600"]
         }
     },
 
     protractorSnapshotOpts: {
-	basename: '%resolution%/%suiteId% - %suiteName%/%browser% - %specId% - %specName% (%increment%)',
+        basename: '%resolution%/%suiteId% - %suiteName%/%browser% - %specId% - %specName% (%increment%)',
         image: {
             target: './reports/protractor-snapshot/custom/image',
             callbacks: [
-                function (instance, png, customConfig) {
-                },
+                function(instance, png, customConfig) {},
                 require('protractor-snapshot').saveImage
             ]
         },
@@ -30,42 +26,25 @@ exports.config = {
             target: './reports/protractor-snapshot/custom/source',
             removeMetaFragments: false,
             callbacks: [
-                function (instance, html, customConfig) {
-                },
+                function(instance, html, customConfig) {},
                 require('protractor-snapshot').saveSource
             ]
         },
         defaultResolution: [700, 700, 'window'],
         resolutions: [
             [1366, 768, 'window'],
-			[320, 568, 'viewport']
+            [320, 568, 'viewport']
         ],
-        onInit: function ($snapshot) {
+        onInit: function($snapshot) {
             $snapshot.clearTarget('./reports');
         },
         report: './reports/protractor-snapshot/report.json'
     },
-    specs: ['./e2e/todo-spec.js'],
-    onPrepare: function () {
+    specs: ['todo.js'],
+    onPrepare: function() {
         var $protractorSnapshot = require('protractor-snapshot');
         $protractorSnapshot.addReporter();
-        browser.ignoreSynchronization = true;
         browser.manage().window().maximize();
-        jasmine.getEnv().addReporter(new SpecReporter({
-            displayFailuresSummary: true,
-            displayFailedSpec: true,
-            displaySuiteNumber: true,
-            displaySpecDuration: true,
-        }));
-        jasmine.getEnv().addReporter(new Jasmine2HtmlReporter({
-            savePath: "test/e2e/html-report",
-            fileName: "Projeto QA",
-            fixedScreenshotName: true,
-            cleanDestination: false,
-            consolidate: true,
-            takeScreenshotsOnlyOnFailures: false,
-        }));
-    },// highlightDelay: 500
+    },
+    highlightDelay: 500
 };
-
-
